@@ -14,9 +14,9 @@ import utils.Driver;
 import utils.Waiter;
 
 public class CarvanaSteps {
+
    WebDriver driver;
    CarvanaPage carvanaPage;
-
 
    @Before
    public void setup() {
@@ -24,37 +24,39 @@ public class CarvanaSteps {
       carvanaPage = new CarvanaPage();
    }
 
-
-   @Given("user is on {string}")
-   public void userIsOn(String url) {
-      driver.get(url);
-
-   }
-
    @When("user clicks on {string} menu item")
    public void userClicksOnMenuItem(String linkText)  {
 
-      Waiter.waitForVisibilityOfElement(carvanaPage.carFinderLink, 15);
+     Waiter.pause(15);
       switch (linkText){
+         case "AUTO LOAN CALCULATOR":
+            carvanaPage.AutoLoanLinkText.click();
+            break;
          case  "CAR FINDER":
             System.out.println(carvanaPage.carFinderLink.getText());
             carvanaPage.carFinderLink.click();
             break;
-         case "SELL/TRADE":
+         case"SELL/TRADE":
+            Waiter.pause(5);
             carvanaPage.selTradeMenu.click();
             break;
          default:
-            throw new NotFoundException("The buttonText text is not defined properly in the feature file!!!");
+            throw new NotFoundException("The link is not defined properly in the feature file!!!");
+
       }
-
-      Assert.assertTrue(carvanaPage.carFinderLink.isDisplayed());
-
-
    }
 
    @Then("user should be navigated to {string}")
-   public void userShouldBeNavigatedTo(String url) {
-      Assert.assertEquals(driver.getCurrentUrl(), url);
+   public void userShouldBeNavigatedTo(String navigatedToUrl) {
+      switch (navigatedToUrl) {
+         case "https://www.carvana.com/help-me-search/":
+         case "https://www.carvana.com/help-me-search/qa":
+         case "https://www.carvana.com/sell-my-car":
+            Assert.assertEquals(navigatedToUrl, driver.getCurrentUrl());
+            break;
+         default:
+            throw new NotFoundException("The url is not defined properly in the feature file!!!");
+      }
    }
 
    @And("user should see {string} text")
@@ -84,6 +86,7 @@ public class CarvanaSteps {
             Assert.assertEquals(paragraphText, carvanaPage.selectUpTo4Text.getText());
 
          case "GET A REAL OFFER IN 2 MINUTES":
+            Waiter.pause(10);
             Assert.assertEquals(paragraphText, carvanaPage.realOffer.getText());
             break;
          case "We pick up your car. You get paid on the spot.":
@@ -101,16 +104,7 @@ public class CarvanaSteps {
 
    @And("user should see {string} link")
    public void userShouldSeeLink(String link) {
-      switch (link) {
-         case "https://www.carvana.com/help-me-search/":
-            Assert.assertEquals(driver.getCurrentUrl(), link);
-            break;
-         case  "https://www.carvana.com/help-me-search/qa":
-            Assert.assertEquals(driver.getCurrentUrl() ,link);
-            break;
-         default:
-            throw new NotFoundException("The link is not defined properly in the feature file!!!");
-      }
+
    }
 
    @When("user clicks on {string} link")
@@ -127,6 +121,9 @@ public class CarvanaSteps {
             break;
          case "VIN":
             carvanaPage.vinButton.click();
+            break;
+         case "AUTO LOAN CALCULATOR":
+            carvanaPage.AutoLoanLinkText.click();
             break;
          default:
             throw new NotFoundException("The button is not defined properly in the feature file!!!");

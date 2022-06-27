@@ -27,7 +27,7 @@ Feature: Carvana first cucumber project
     When user clicks on "VIN" button
     And user enters vin number as "12345678912345678"
     And user clicks on "GET MY OFFER" button
-  #  Then user should see "We couldn’t find that VIN. Please check your entry and try again." text
+   #Then user should see "We couldn’t find that VIN. Please check your entry and try again." text
 
 
   Scenario: Validate AUTO LOAN CALCULATOR under FINANCING menu item

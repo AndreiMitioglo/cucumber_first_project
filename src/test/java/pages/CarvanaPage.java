@@ -20,6 +20,7 @@ public class CarvanaPage {
     public WebElement carFinderCanHelpText;
 
     @FindBy(css = "a[data-qa=\"router-link\"]")
+
     public WebElement tryCarFinderButton;
 
 
@@ -34,7 +35,7 @@ public class CarvanaPage {
     public WebElement selTradeMenu;
 
 
-    @FindBy(css= "div[class=\"sc-7ed29b82-1 jwFVns\"]  div:nth-child(2)")
+    @FindBy(xpath= "//div[@class='sc-7ed29b82-1 jwFVns']//div[2]")
     public WebElement realOffer;
 
 
@@ -76,6 +77,8 @@ public class CarvanaPage {
     @FindBy(css = "div[class=\"loan-calculator-display-value\"]")
     public WebElement monthlyPayment;
 
+    @FindBy(css = "a[class='MenuButton__MenuButtonWrapper-dq0g44-0 imLDTG']")
+    public WebElement financingLink;
     }
 
 

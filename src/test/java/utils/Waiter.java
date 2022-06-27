@@ -18,7 +18,7 @@ public class Waiter {
 
     public static void waitForVisibilityOfElement(WebElement element, int seconds){
 
-        new WebDriverWait(driver, seconds).until(ExpectedConditions.visibilityOf(element));
+        new WebDriverWait(Waiter.driver, seconds).until(ExpectedConditions.visibilityOf(element));
     }
 
     public static void waitUntilTitleIs(WebDriver driver,int seconds, String title){
